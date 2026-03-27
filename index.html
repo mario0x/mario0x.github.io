@@ -28,7 +28,6 @@
     padding: 3rem 1.5rem;
   }
 
-  /* ── PAGE HEADER ── */
   .page-header {
     max-width: 860px;
     margin: 0 auto 2.5rem;
@@ -44,7 +43,6 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.6rem;
     letter-spacing: 0.06em;
-    color: var(--white);
     line-height: 1;
   }
   .page-header h1 span { color: var(--red); }
@@ -56,7 +54,6 @@
     letter-spacing: 0.14em;
   }
 
-  /* ── CARDS WRAPPER ── */
   .cards-wrapper {
     max-width: 860px;
     margin: 0 auto;
@@ -65,7 +62,6 @@
     gap: 2.5rem;
   }
 
-  /* ── CARD ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -77,309 +73,297 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── HERO ── */
-  .hero {
+  /* ══ CAROUSEL ══ */
+  .carousel {
     position: relative;
-    height: 300px;
-    background: linear-gradient(135deg, #1a0a0a 0%, #0f0f0f 50%, #0a0a14 100%);
+    height: 340px;
+    background: #0d0d0d;
+    overflow: hidden;
+    user-select: none;
+  }
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  }
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    background: linear-gradient(135deg, #1a0a0a 0%, #0f0f0f 50%, #0a0a14 100%);
+    cursor: zoom-in;
+    position: relative;
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+  .carousel-slide::before {
+    content:'';
+    position:absolute;inset:0;
     background:
-      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px),
-      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+      repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.012) 40px,rgba(255,255,255,0.012) 41px),
+      repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.012) 40px,rgba(255,255,255,0.012) 41px);
+    pointer-events:none;
   }
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    inset: 0;
-    opacity: 0.85;
+  .carousel-slide img {
+    width:100%; height:100%; object-fit:cover; display:block;
   }
-  .hero-glow {
-    position: absolute;
-    width: 500px;
-    height: 300px;
-    background: radial-gradient(ellipse, rgba(230,51,41,0.15) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+  .slide-placeholder {
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:10px; color:var(--muted); pointer-events:none;
   }
+  .slide-placeholder svg { opacity:0.2; }
+  .slide-placeholder span {
+    font-family:var(--mono); font-size:0.6rem;
+    text-transform:uppercase; letter-spacing:0.14em; opacity:0.4;
+  }
+
+  .carousel-btn {
+    position:absolute; top:50%; transform:translateY(-50%); z-index:10;
+    background:rgba(0,0,0,0.55); border:1px solid rgba(255,255,255,0.08);
+    color:var(--white); width:38px; height:38px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .18s, border-color .18s;
+    backdrop-filter:blur(4px);
+  }
+  .carousel-btn:hover { background:var(--red); border-color:var(--red); }
+  .carousel-btn.prev { left:14px; }
+  .carousel-btn.next { right:14px; }
+  .carousel-btn svg { width:16px; height:16px; }
+
+  .carousel-dots {
+    position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+    display:flex; gap:6px; z-index:10;
+  }
+  .dot {
+    width:6px; height:6px; background:rgba(255,255,255,0.25);
+    border-radius:50%; cursor:pointer; transition:background .2s, transform .2s;
+  }
+  .dot.active { background:var(--red); transform:scale(1.3); }
+
+  .carousel-counter {
+    position:absolute; bottom:14px; right:14px;
+    font-family:var(--mono); font-size:0.6rem;
+    color:rgba(255,255,255,0.4); letter-spacing:0.1em; z-index:10;
+  }
+
   .hero-badge {
-    position: absolute;
-    top: 18px; right: 18px;
-    background: var(--red);
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    padding: 5px 11px;
-    text-transform: uppercase;
-    z-index: 2;
+    position:absolute; top:16px; right:16px;
+    background:var(--red); font-family:var(--mono);
+    font-size:0.66rem; font-weight:500; letter-spacing:0.1em;
+    padding:5px 11px; text-transform:uppercase; z-index:10; pointer-events:none;
   }
   .hero-km {
-    position: absolute;
-    bottom: 18px; left: 20px;
-    z-index: 2;
+    position:absolute; bottom:36px; left:18px; z-index:10; pointer-events:none;
   }
   .hero-km span {
-    display: block;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.8rem;
-    line-height: 1;
-    color: var(--white);
+    display:block; font-family:'Bebas Neue',sans-serif;
+    font-size:2.6rem; line-height:1; color:var(--white);
+    text-shadow:0 2px 12px rgba(0,0,0,0.7);
   }
   .hero-km small {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-  .car-svg-wrap {
-    position: relative;
-    z-index: 1;
-  }
-  .car-svg {
-    width: 420px;
-    max-width: 90%;
-    opacity: 0.9;
-    filter: drop-shadow(0 0 40px rgba(230,51,41,0.3));
+    font-family:var(--mono); font-size:0.6rem;
+    color:rgba(240,237,232,0.6); text-transform:uppercase; letter-spacing:0.12em;
   }
 
-  /* ── TITLE BAR ── */
+  /* ══ LIGHTBOX ══ */
+  .lightbox {
+    display:none; position:fixed; inset:0; z-index:1000;
+    background:rgba(0,0,0,0.94); align-items:center; justify-content:center;
+  }
+  .lightbox.open { display:flex; }
+  .lightbox-inner {
+    max-width:96vw; max-height:92vh;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  #lb-img {
+    max-width:92vw; max-height:88vh; object-fit:contain; display:block;
+    transform-origin:center center; transition:transform 0.15s ease;
+    cursor:grab;
+  }
+  #lb-img.dragging { cursor:grabbing; transition:none; }
+
+  .lb-close {
+    position:fixed; top:16px; right:18px;
+    background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.12);
+    color:var(--white); width:36px; height:36px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:1rem; z-index:1001; transition:background .15s;
+  }
+  .lb-close:hover { background:var(--red); border-color:var(--red); }
+
+  .lb-nav {
+    position:fixed; top:50%; transform:translateY(-50%);
+    background:rgba(0,0,0,0.55); border:1px solid rgba(255,255,255,0.08);
+    color:var(--white); width:42px; height:42px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:1001; transition:background .15s;
+  }
+  .lb-nav:hover { background:var(--red); border-color:var(--red); }
+  .lb-nav.prev { left:12px; }
+  .lb-nav.next { right:12px; }
+
+  .lb-bar {
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+    display:flex; gap:6px; z-index:1001;
+  }
+  .lb-btn {
+    background:rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.1);
+    color:var(--white); width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:1rem; font-family:var(--mono);
+    transition:background .15s;
+  }
+  .lb-btn:hover { background:var(--red); }
+  .lb-counter-pill {
+    background:rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.1);
+    color:rgba(255,255,255,0.45); padding:0 14px; height:34px;
+    display:flex; align-items:center;
+    font-family:var(--mono); font-size:0.63rem; letter-spacing:0.1em;
+  }
+
+  /* ══ CARD CONTENT ══ */
   .title-bar {
-    padding: 22px 26px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    padding:22px 26px; border-bottom:1px solid var(--border);
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:1rem; flex-wrap:wrap;
   }
   .title-bar h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.1rem;
-    letter-spacing: 0.04em;
-    line-height: 1;
+    font-family:'Bebas Neue',sans-serif; font-size:2.1rem;
+    letter-spacing:0.04em; line-height:1;
   }
-  .title-bar h2 span { color: var(--red); }
+  .title-bar h2 span { color:var(--red); }
   .price-block .price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--red);
+    font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--red);
   }
   .price-block .ono {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: right;
+    font-family:var(--mono); font-size:0.62rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.1em; text-align:right;
   }
 
-  /* ── STATUS ROW ── */
-  .status-row {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
+  .status-row { display:flex; border-bottom:1px solid var(--border); flex-wrap:wrap; }
   .status-item {
-    flex: 1;
-    min-width: 120px;
-    padding: 12px 18px;
-    border-right: 1px solid var(--border);
+    flex:1; min-width:120px; padding:12px 18px;
+    border-right:1px solid var(--border);
   }
-  .status-item:last-child { border-right: none; }
+  .status-item:last-child { border-right:none; }
   .s-label {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    display: block;
-    margin-bottom: 2px;
+    font-family:var(--mono); font-size:0.58rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.12em; display:block; margin-bottom:2px;
   }
-  .s-value {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--white);
-  }
-  .green { color: #4ade80; }
-  .yellow { color: #facc15; }
+  .s-value { font-size:0.8rem; font-weight:500; color:var(--white); }
+  .green { color:#4ade80; }
+  .yellow { color:#facc15; }
 
-  /* ── BODY ── */
-  .card-body { padding: 0 26px 26px; }
-
-  .section { margin-top: 26px; }
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  .section-header .sh-line { flex: 1; height: 1px; background: var(--border); }
+  .card-body { padding:0 26px 26px; }
+  .section { margin-top:26px; }
+  .section-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .section-header .sh-line { flex:1; height:1px; background:var(--border); }
   .section-header h3 {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--muted);
-    white-space: nowrap;
+    font-family:var(--mono); font-size:0.62rem; text-transform:uppercase;
+    letter-spacing:0.16em; color:var(--muted); white-space:nowrap;
   }
 
-  /* ── MOD GRID ── */
   .mod-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 7px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:7px;
   }
   .mod-item {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    padding: 9px 13px;
-    display: flex;
-    gap: 9px;
-    align-items: flex-start;
-    transition: border-color 0.2s;
+    background:var(--surface2); border:1px solid var(--border);
+    padding:9px 13px; display:flex; gap:9px; align-items:flex-start;
+    transition:border-color .2s;
   }
-  .mod-item:hover { border-color: var(--red); }
-  .mod-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 1px; }
+  .mod-item:hover { border-color:var(--red); }
+  .mod-icon { font-size:0.95rem; flex-shrink:0; margin-top:1px; }
   .mod-cat {
-    font-family: var(--mono);
-    font-size: 0.56rem;
-    color: var(--red);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 2px;
+    font-family:var(--mono); font-size:0.56rem; color:var(--red);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:2px;
   }
-  .mod-name { font-size: 0.76rem; font-weight: 500; line-height: 1.4; }
+  .mod-name { font-size:0.76rem; font-weight:500; line-height:1.4; }
 
-  /* ── RECENT ── */
-  .recent-list { display: flex; flex-direction: column; gap: 6px; }
+  .recent-list { display:flex; flex-direction:column; gap:6px; }
   .recent-item {
-    background: var(--surface2);
-    border-left: 3px solid var(--red);
-    padding: 9px 13px;
-    font-size: 0.78rem;
-    line-height: 1.5;
+    background:var(--surface2); border-left:3px solid var(--red);
+    padding:9px 13px; font-size:0.78rem; line-height:1.5;
   }
-  .recent-item strong { color: var(--red); font-weight: 500; }
+  .recent-item strong { color:var(--red); font-weight:500; }
 
-  /* ── SELLER NOTE ── */
   .seller-note {
-    background: var(--red-dim);
-    border: 1px solid rgba(230,51,41,0.18);
-    padding: 14px 16px;
-    font-size: 0.78rem;
-    color: #ccc;
-    line-height: 1.7;
-    font-style: italic;
+    background:var(--red-dim); border:1px solid rgba(230,51,41,0.18);
+    padding:14px 16px; font-size:0.78rem; color:#ccc; line-height:1.7; font-style:italic;
   }
 
-  /* ── CARD FOOTER ── */
   .card-footer {
-    border-top: 1px solid var(--border);
-    padding: 13px 26px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    justify-content: space-between;
+    border-top:1px solid var(--border); padding:13px 26px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
   }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-  }
-  .tag span { color: var(--red); }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { font-family:var(--mono); font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.09em; }
+  .tag span { color:var(--red); }
 
-  /* ── ADD BUTTON ── */
-  .add-btn-wrap {
-    max-width: 860px;
-    margin: 2rem auto 0;
-    display: flex;
-    justify-content: center;
-  }
+  .add-btn-wrap { max-width:860px; margin:2rem auto 0; display:flex; justify-content:center; }
   .add-btn {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    border: 1px dashed var(--border);
-    background: transparent;
-    padding: 14px 32px;
-    cursor: pointer;
-    transition: all 0.2s;
+    font-family:var(--mono); font-size:0.7rem; text-transform:uppercase;
+    letter-spacing:0.14em; color:var(--muted); border:1px dashed var(--border);
+    background:transparent; padding:14px 32px; cursor:pointer; transition:all .2s;
   }
-  .add-btn:hover { border-color: var(--red); color: var(--red); }
+  .add-btn:hover { border-color:var(--red); color:var(--red); }
 
-  @media (max-width: 520px) {
-    .hero { height: 200px; }
-    .car-svg { width: 260px; }
-    .hero-km span { font-size: 2rem; }
-    .title-bar h2 { font-size: 1.6rem; }
-    .price-block .price { font-size: 1.6rem; }
+  @media (max-width:520px) {
+    .carousel { height:220px; }
+    .hero-km span { font-size:1.9rem; }
+    .title-bar h2 { font-size:1.6rem; }
+    .price-block .price { font-size:1.6rem; }
+    .lb-nav.prev { left:4px; }
+    .lb-nav.next { right:4px; }
   }
 </style>
 </head>
 <body>
 
+<!-- ══ LIGHTBOX ══ -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner" id="lb-inner">
+    <img id="lb-img" src="" alt="">
+  </div>
+  <button class="lb-close" onclick="lbClose()">✕</button>
+  <button class="lb-nav prev" onclick="lbNav(-1)">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="10,2 4,8 10,14"/></svg>
+  </button>
+  <button class="lb-nav next" onclick="lbNav(1)">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6,2 12,8 6,14"/></svg>
+  </button>
+  <div class="lb-bar">
+    <button class="lb-btn" title="Alejar" onclick="lbZoom(-0.3)">−</button>
+    <button class="lb-btn" title="Resetear zoom" onclick="lbZoom(0)">⟳</button>
+    <span class="lb-counter-pill" id="lb-ctr">1 / 1</span>
+    <button class="lb-btn" title="Acercar" onclick="lbZoom(0.3)">+</button>
+  </div>
+</div>
+
+<!-- ══ PAGE ══ -->
 <header class="page-header">
   <h1>MIS <span>ANUNCIOS</span></h1>
-  <span class="car-count" id="car-count">1 coche</span>
+  <span class="car-count" id="car-count"></span>
 </header>
 
-<div class="cards-wrapper" id="cards-wrapper">
+<div class="cards-wrapper">
 
-  <!-- ══ COCHE 1 ══ -->
-  <div class="card">
-    <div class="hero">
-      <div class="hero-glow"></div>
-      <div class="hero-badge">DRIFT BUILD</div>
-      <div class="hero-km">
-        <span>108K</span>
-        <small>millas · ~174.000 km</small>
-      </div>
-      <!-- Si tienes foto real, reemplaza el SVG por:
-           <img class="hero-img" src="foto_coche1.jpg" alt="Nissan 350Z"> -->
-      <div class="car-svg-wrap">
-        <svg class="car-svg" viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M60 130 C60 130 80 90 140 75 C180 65 220 60 260 60 C310 60 360 68 400 85 C430 96 445 115 448 130 Z" fill="#1e1e1e" stroke="#333" stroke-width="1.5"/>
-          <path d="M160 75 C175 55 200 45 245 43 C290 41 315 48 340 60 C360 68 375 75 375 75 Z" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
-          <path d="M175 72 C185 56 200 48 240 46 C270 44 290 50 305 58 C290 62 260 66 230 68 Z" fill="#0d1a2e" stroke="#1a2a3a" stroke-width="1" opacity="0.8"/>
-          <path d="M310 60 C325 65 345 72 355 75 L330 75 C315 73 310 68 Z" fill="#0d1a2e" stroke="#1a2a3a" stroke-width="1" opacity="0.8"/>
-          <line x1="40" y1="130" x2="470" y2="130" stroke="#222" stroke-width="1"/>
-          <circle cx="135" cy="130" r="28" fill="#111" stroke="#e63329" stroke-width="2"/>
-          <circle cx="135" cy="130" r="18" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
-          <circle cx="135" cy="130" r="5" fill="#e63329"/>
-          <circle cx="375" cy="130" r="28" fill="#111" stroke="#e63329" stroke-width="2"/>
-          <circle cx="375" cy="130" r="18" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
-          <circle cx="375" cy="130" r="5" fill="#e63329"/>
-          <path d="M60 130 L55 125 L65 122 L70 128" fill="#222" stroke="#333" stroke-width="1"/>
-          <path d="M448 130 L453 126 L446 122 L441 127" fill="#222" stroke="#333" stroke-width="1"/>
-          <rect x="432" y="126" width="18" height="5" rx="2" fill="#1a1a1a" stroke="#e63329" stroke-width="1"/>
-          <line x1="135" y1="112" x2="135" y2="148" stroke="#555" stroke-width="1.5"/>
-          <line x1="117" y1="130" x2="153" y2="130" stroke="#555" stroke-width="1.5"/>
-          <line x1="122" y1="117" x2="148" y2="143" stroke="#555" stroke-width="1.5"/>
-          <line x1="148" y1="117" x2="122" y2="143" stroke="#555" stroke-width="1.5"/>
-          <line x1="375" y1="112" x2="375" y2="148" stroke="#555" stroke-width="1.5"/>
-          <line x1="357" y1="130" x2="393" y2="130" stroke="#555" stroke-width="1.5"/>
-          <line x1="362" y1="117" x2="388" y2="143" stroke="#555" stroke-width="1.5"/>
-          <line x1="388" y1="117" x2="362" y2="143" stroke="#555" stroke-width="1.5"/>
-        </svg>
-      </div>
+  <!-- ══════════════════════════════════════════
+       COCHE 1
+       Para añadir fotos: pon las rutas en "images"
+       Pueden ser rutas relativas ("fotos/coche1_1.jpg")
+       o URLs completas ("https://...")
+       Si no hay fotos, deja: "images":[]
+  ══════════════════════════════════════════ -->
+  <div class="card" data-carousel='{"id":"c1","images":["cars/nissan-350z/1.jpg","cars/nissan-350z/2.jpg","cars/nissan-350z/3.jpg","cars/nissan-350z/4.jpg","cars/nissan-350z/5.jpg"]}'>
+
+    <div class="carousel-slot">
+      <!-- El carousel se construye por JS -->
+      <!-- Overlays que se inyectarán dentro -->
+      <template class="overlays">
+        <div class="hero-badge">DRIFT BUILD</div>
+        <div class="hero-km"><span>108K</span><small>millas · ~174.000 km</small></div>
+      </template>
     </div>
 
     <div class="title-bar">
@@ -391,31 +375,17 @@
     </div>
 
     <div class="status-row">
-      <div class="status-item">
-        <span class="s-label">MOT / ITV</span>
-        <span class="s-value green">✓ Hasta Sept.</span>
-      </div>
-      <div class="status-item">
-        <span class="s-label">Kilometraje</span>
-        <span class="s-value">108.000 mi</span>
-      </div>
-      <div class="status-item">
-        <span class="s-label">Pintura</span>
-        <span class="s-value">Repintado 2.5 años</span>
-      </div>
-      <div class="status-item">
-        <span class="s-label">Uso reciente</span>
-        <span class="s-value yellow">< 500 mi / año</span>
-      </div>
+      <div class="status-item"><span class="s-label">MOT / ITV</span><span class="s-value green">✓ Hasta Sept.</span></div>
+      <div class="status-item"><span class="s-label">Kilometraje</span><span class="s-value">108.000 mi</span></div>
+      <div class="status-item"><span class="s-label">Pintura</span><span class="s-value">Repintado 2.5 años</span></div>
+      <div class="status-item"><span class="s-label">Uso reciente</span><span class="s-value yellow">&lt; 500 mi / año</span></div>
     </div>
 
     <div class="card-body">
       <div class="section">
-        <div class="section-header">
-          <h3>Modificaciones</h3><div class="sh-line"></div>
-        </div>
+        <div class="section-header"><h3>Modificaciones</h3><div class="sh-line"></div></div>
         <div class="mod-grid">
-          <div class="mod-item"><span class="mod-icon">🌀</span><div><div class="mod-cat">Admisión</div><div class="mod-name">Filtro K&N</div></div></div>
+          <div class="mod-item"><span class="mod-icon">🌀</span><div><div class="mod-cat">Admisión</div><div class="mod-name">Filtro K&amp;N</div></div></div>
           <div class="mod-item"><span class="mod-icon">🔩</span><div><div class="mod-cat">Suspensión</div><div class="mod-name">Tein</div></div></div>
           <div class="mod-item"><span class="mod-icon">💧</span><div><div class="mod-cat">Refrigeración</div><div class="mod-name">Radiador + Ventiladores Mishimoto</div></div></div>
           <div class="mod-item"><span class="mod-icon">🔴</span><div><div class="mod-cat">Frenos traseros</div><div class="mod-name">Calipers Brembo + Soporte doble GK Tech</div></div></div>
@@ -423,30 +393,22 @@
           <div class="mod-item"><span class="mod-icon">🛞</span><div><div class="mod-cat">Latiguillos</div><div class="mod-name">HEL Performance (todo alrededor)</div></div></div>
           <div class="mod-item"><span class="mod-icon">⚙️</span><div><div class="mod-cat">Diferencial</div><div class="mod-name">Soldado (Welded Diff)</div></div></div>
           <div class="mod-item"><span class="mod-icon">💨</span><div><div class="mod-cat">Escape</div><div class="mod-name">Jap Speed K4 (réplica HKS)</div></div></div>
-          <div class="mod-item"><span class="mod-icon">⚡</span><div><div class="mod-cat">Electrónica</div><div class="mod-name">Z-Tech SMART — VDC & TCS Disable + Burnout Mode</div></div></div>
+          <div class="mod-item"><span class="mod-icon">⚡</span><div><div class="mod-cat">Electrónica</div><div class="mod-name">Z-Tech SMART — VDC &amp; TCS Disable + Burnout Mode</div></div></div>
           <div class="mod-item"><span class="mod-icon">🎡</span><div><div class="mod-cat">Llantas</div><div class="mod-name">Rota Grid 18"</div></div></div>
           <div class="mod-item"><span class="mod-icon">🏁</span><div><div class="mod-cat">Asientos</div><div class="mod-name">Cobra Mola S (como nuevos)</div></div></div>
           <div class="mod-item"><span class="mod-icon">🎯</span><div><div class="mod-cat">Volante</div><div class="mod-name">Drift Works + Buje corto NRG</div></div></div>
         </div>
       </div>
-
       <div class="section">
-        <div class="section-header">
-          <h3>Mantenimiento reciente</h3><div class="sh-line"></div>
-        </div>
+        <div class="section-header"><h3>Mantenimiento reciente</h3><div class="sh-line"></div></div>
         <div class="recent-list">
           <div class="recent-item"><strong>Brazos de control superiores delanteros</strong> — Sustituidos recientemente</div>
           <div class="recent-item"><strong>Discos y pastillas de freno</strong> — Nuevos, menos de 1.000 km de uso</div>
         </div>
       </div>
-
       <div class="section">
-        <div class="section-header">
-          <h3>Nota del vendedor</h3><div class="sh-line"></div>
-        </div>
-        <div class="seller-note">
-          No se usa — tengo otro vehículo de uso diario y no le puse más de 500 millas el año pasado. Venta reluctante por cambio de circunstancias. Coche muy limpio para su edad. Cualquier pregunta, no dudéis en contactar.
-        </div>
+        <div class="section-header"><h3>Nota del vendedor</h3><div class="sh-line"></div></div>
+        <div class="seller-note">No se usa — tengo otro vehículo de uso diario y no le puse más de 500 millas el año pasado. Venta reluctante por cambio de circunstancias. Coche muy limpio para su edad. Cualquier pregunta, no dudéis en contactar.</div>
       </div>
     </div>
 
@@ -467,14 +429,190 @@
 </div>
 
 <div class="add-btn-wrap">
-  <button class="add-btn" onclick="alert('Pega el texto del siguiente anuncio en el chat para añadirlo.')">+ Añadir coche</button>
+  <button class="add-btn">+ Añadir coche</button>
 </div>
 
 <script>
-  // Actualiza el contador de coches automáticamente
-  const count = document.querySelectorAll('.card').length;
-  document.getElementById('car-count').textContent = count + (count === 1 ? ' coche' : ' coches');
-</script>
+// ─────────────────────────────────────────
+// CAROUSEL
+// ─────────────────────────────────────────
+const CAR = {}; // state per carousel id
 
+function buildCarousel(card) {
+  const cfg   = JSON.parse(card.dataset.carousel);
+  const id    = cfg.id;
+  const imgs  = Array.isArray(cfg.images) ? cfg.images : [];
+  const slot  = card.querySelector('.carousel-slot');
+  const tpl   = slot.querySelector('template.overlays');
+  const overlayHTML = tpl ? tpl.innerHTML : '';
+
+  // slides
+  let slidesHTML = '';
+  if (imgs.length) {
+    imgs.forEach((src, i) => {
+      slidesHTML += `<div class="carousel-slide" onclick="lbOpen('${id}',${i})"><img src="${src}" alt="Foto ${i+1}" loading="lazy"></div>`;
+    });
+  } else {
+    slidesHTML = `<div class="carousel-slide" style="cursor:default">
+      <div class="slide-placeholder">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#888" stroke-width="1.5">
+          <rect x="4" y="12" width="48" height="34" rx="3"/>
+          <circle cx="28" cy="29" r="10"/>
+          <circle cx="28" cy="29" r="4.5"/>
+          <circle cx="43" cy="17" r="3" fill="#888" stroke="none"/>
+        </svg>
+        <span>Añade rutas en "images":[] del HTML</span>
+      </div>
+    </div>`;
+  }
+
+  // arrows + dots + counter
+  const multi = imgs.length > 1;
+  const arrowsHTML = multi ? `
+    <button class="carousel-btn prev" onclick="carNav('${id}',-1)">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="10,2 4,8 10,14"/></svg>
+    </button>
+    <button class="carousel-btn next" onclick="carNav('${id}',1)">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6,2 12,8 6,14"/></svg>
+    </button>` : '';
+
+  const dotsHTML = multi
+    ? `<div class="carousel-dots">${imgs.map((_,i)=>`<div class="dot${i===0?' active':''}" onclick="carGo('${id}',${i})"></div>`).join('')}</div>`
+    : '';
+
+  const ctrHTML = multi
+    ? `<div class="carousel-counter" id="${id}-ctr">1 / ${imgs.length}</div>` : '';
+
+  slot.outerHTML = `
+    <div class="carousel" id="car-${id}">
+      <div class="carousel-track" id="${id}-track">${slidesHTML}</div>
+      ${arrowsHTML}${dotsHTML}${ctrHTML}
+      ${overlayHTML}
+    </div>`;
+
+  CAR[id] = { imgs, cur: 0 };
+  initSwipe(id);
+}
+
+function carGo(id, idx) {
+  const c = CAR[id]; if (!c) return;
+  c.cur = ((idx % c.imgs.length) + c.imgs.length) % c.imgs.length;
+  document.getElementById(`${id}-track`).style.transform = `translateX(-${c.cur * 100}%)`;
+  document.querySelectorAll(`#car-${id} .dot`).forEach((d,i) => d.classList.toggle('active', i === c.cur));
+  const ctr = document.getElementById(`${id}-ctr`);
+  if (ctr) ctr.textContent = `${c.cur+1} / ${c.imgs.length}`;
+}
+function carNav(id, dir) { carGo(id, CAR[id].cur + dir); }
+
+function initSwipe(id) {
+  const el = document.getElementById(`car-${id}`); if (!el) return;
+  let sx = 0;
+  el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive:true });
+  el.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) carNav(id, dx < 0 ? 1 : -1);
+  }, { passive:true });
+}
+
+// ─────────────────────────────────────────
+// LIGHTBOX
+// ─────────────────────────────────────────
+const LB = { id: null, idx: 0, imgs: [], scale: 1 };
+const drag = { on: false, sx: 0, sy: 0, tx: 0, ty: 0, lx: 0, ly: 0 };
+const lbEl  = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCtr = document.getElementById('lb-ctr');
+
+function lbOpen(id, idx) {
+  const c = CAR[id]; if (!c || !c.imgs.length) return;
+  Object.assign(LB, { id, idx, imgs: c.imgs, scale: 1 });
+  lbEl.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lbRender();
+}
+function lbClose() {
+  lbEl.classList.remove('open');
+  document.body.style.overflow = '';
+  lbReset();
+}
+function lbRender() {
+  lbImg.src = LB.imgs[LB.idx];
+  lbCtr.textContent = `${LB.idx+1} / ${LB.imgs.length}`;
+  // show/hide nav arrows
+  const showNav = LB.imgs.length > 1;
+  document.querySelectorAll('.lb-nav').forEach(b => b.style.display = showNav ? '' : 'none');
+  lbReset();
+  carGo(LB.id, LB.idx);
+}
+function lbNav(dir) {
+  LB.idx = (LB.idx + dir + LB.imgs.length) % LB.imgs.length;
+  lbRender();
+}
+function lbReset() {
+  LB.scale = 1;
+  Object.assign(drag, { on:false, tx:0, ty:0, lx:0, ly:0 });
+  lbImg.style.transform = 'scale(1) translate(0px,0px)';
+}
+function lbApply() {
+  lbImg.style.transform = `scale(${LB.scale}) translate(${drag.lx/LB.scale}px,${drag.ly/LB.scale}px)`;
+}
+function lbZoom(delta) {
+  if (delta === 0) { lbReset(); return; }
+  LB.scale = Math.min(5, Math.max(1, LB.scale + delta));
+  if (LB.scale === 1) lbReset();
+  else lbApply();
+}
+
+// click backdrop
+lbEl.addEventListener('click', e => { if (e.target === lbEl) lbClose(); });
+
+// drag to pan
+lbImg.addEventListener('mousedown', e => {
+  if (LB.scale <= 1) return;
+  drag.on = true; drag.sx = e.clientX - drag.lx; drag.sy = e.clientY - drag.ly;
+  lbImg.classList.add('dragging'); e.preventDefault();
+});
+document.addEventListener('mousemove', e => {
+  if (!drag.on) return;
+  drag.tx = e.clientX - drag.sx; drag.ty = e.clientY - drag.sy;
+  lbImg.style.transform = `scale(${LB.scale}) translate(${drag.tx/LB.scale}px,${drag.ty/LB.scale}px)`;
+});
+document.addEventListener('mouseup', () => {
+  if (!drag.on) return;
+  drag.lx = drag.tx; drag.ly = drag.ty; drag.on = false;
+  lbImg.classList.remove('dragging');
+});
+
+// scroll to zoom
+lbEl.addEventListener('wheel', e => {
+  e.preventDefault(); lbZoom(e.deltaY < 0 ? 0.25 : -0.25);
+}, { passive:false });
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if (!lbEl.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft')  lbNav(-1);
+  if (e.key === 'Escape')     lbClose();
+  if (e.key === '+')          lbZoom(0.3);
+  if (e.key === '-')          lbZoom(-0.3);
+});
+
+// touch swipe in lightbox
+let lbTx = 0;
+lbEl.addEventListener('touchstart', e => { lbTx = e.touches[0].clientX; }, { passive:true });
+lbEl.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - lbTx;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+}, { passive:true });
+
+// ─────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────
+document.querySelectorAll('.card[data-carousel]').forEach(buildCarousel);
+
+const n = document.querySelectorAll('.card').length;
+document.getElementById('car-count').textContent = n + (n === 1 ? ' coche' : ' coches');
+</script>
 </body>
 </html>
