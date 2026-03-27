@@ -296,10 +296,18 @@
   .card-footer {
     border-top:1px solid var(--border); padding:13px 26px;
     display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    justify-content:space-between;
   }
   .tags { display:flex; flex-wrap:wrap; gap:6px; }
   .tag { font-family:var(--mono); font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.09em; }
   .tag span { color:var(--red); }
+  .listing-link {
+    font-family:var(--mono); font-size:0.62rem; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--red); text-decoration:none;
+    border:1px solid var(--red); padding:6px 14px;
+    transition:all .2s; white-space:nowrap;
+  }
+  .listing-link:hover { background:var(--red); color:var(--white); }
 
   .car-nav {
     max-width:860px; margin:0 auto 2rem;
@@ -439,6 +447,7 @@
         <span class="tag"><span>#</span>WELDED DIFF</span>
         <span class="tag"><span>#</span>ONO</span>
       </div>
+      <a class="listing-link" href="https://www.facebook.com/marketplace/item/1505561797845238/" target="_blank" rel="noopener">Ver anuncio ↗</a>
     </div>
   </div>
   <!-- ══ FIN COCHE 1 ══ -->
@@ -504,6 +513,7 @@
         <span class="tag"><span>#</span>300HP</span>
         <span class="tag"><span>#</span>2008</span>
       </div>
+      <a class="listing-link" href="https://www.facebook.com/marketplace/item/916063717709977/" target="_blank" rel="noopener">Ver anuncio ↗</a>
     </div>
   </div>
   <!-- ══ FIN COCHE 2 ══ -->
@@ -576,6 +586,7 @@
         <span class="tag"><span>#</span>MANUAL</span>
         <span class="tag"><span>#</span>ONO</span>
       </div>
+      <a class="listing-link" href="https://www.facebook.com/marketplace/item/2441823079573611/" target="_blank" rel="noopener">Ver anuncio ↗</a>
     </div>
   </div>
   <!-- ══ FIN COCHE 3 ══ -->
