@@ -67,6 +67,7 @@
     border: 1px solid var(--border);
     overflow: hidden;
     animation: fadeUp 0.5s ease both;
+    scroll-margin-top: 1rem;
   }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -300,6 +301,18 @@
   .tag { font-family:var(--mono); font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.09em; }
   .tag span { color:var(--red); }
 
+  .car-nav {
+    max-width:860px; margin:0 auto 2rem;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .car-nav a {
+    font-family:var(--mono); font-size:0.68rem; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--muted); border:1px solid var(--border);
+    background:var(--surface); padding:10px 18px; text-decoration:none;
+    transition:all .2s; white-space:nowrap;
+  }
+  .car-nav a:hover { border-color:var(--red); color:var(--red); }
+
   .add-btn-wrap { max-width:860px; margin:2rem auto 0; display:flex; justify-content:center; }
   .add-btn {
     font-family:var(--mono); font-size:0.7rem; text-transform:uppercase;
@@ -346,6 +359,11 @@
   <span class="car-count" id="car-count"></span>
 </header>
 
+<nav class="car-nav">
+  <a href="#car-c1">350Z Drift Build</a>
+  <a href="#car-c2">350Z Black 3.5L</a>
+</nav>
+
 <div class="cards-wrapper">
 
   <!-- ══════════════════════════════════════════
@@ -355,7 +373,7 @@
        o URLs completas ("https://...")
        Si no hay fotos, deja: "images":[]
   ══════════════════════════════════════════ -->
-  <div class="card" data-carousel='{"id":"c1","images":["cars/350z-drift/1.jpg","cars/350z-drift/2.jpg","cars/350z-drift/3.jpg","cars/350z-drift/4.jpg","cars/350z-drift/5.jpg"]}'>
+  <div id="car-c1" class="card" data-carousel='{"id":"c1","images":["cars/350z-drift/1.jpg","cars/350z-drift/2.jpg","cars/350z-drift/3.jpg","cars/350z-drift/4.jpg","cars/350z-drift/5.jpg"]}'>
 
     <div class="carousel-slot">
       <!-- El carousel se construye por JS -->
@@ -427,7 +445,7 @@
   <!-- ══════════════════════════════════════════
        COCHE 2
   ══════════════════════════════════════════ -->
-  <div class="card" data-carousel='{"id":"c2","images":[]}'>
+  <div id="car-c2" class="card" data-carousel='{"id":"c2","images":[]}'>
 
     <div class="carousel-slot">
       <template class="overlays">
@@ -439,8 +457,8 @@
     <div class="title-bar">
       <h2>NISSAN <span>350Z</span><br>3.5L — 2008</h2>
       <div class="price-block">
-        <div class="price">TBD</div>
-        <div class="ono">◎ Precio por confirmar</div>
+        <div class="price">£8.000</div>
+        <div class="ono">◎ Se acepta oferta</div>
       </div>
     </div>
 
